@@ -1,0 +1,33 @@
+22/11/2023
+Antes de se executar o programa e necessário seguir os seguintes passos:
+
+1 - Instalar o Xampp:
+	- Entre no site oficial do Xampp (https://www.apachefriends.org/pt_br/index.html);
+	- Instale a versão 8.2.12 do Xamp.
+
+2 - Instale o MySQL WorkBench:
+	- Entre no site oficial do MySQL (https://dev.mysql.com/downloads/workbench/);
+	- Baixe a versão 8.0.34 do MySQL.
+
+3 - Crie o Banco de dados:
+	- Abra o Xampp ;
+	- No Xampp, clique no botão "START" do MySQL;
+	- Abra o MySQL Wokbench;
+	- No MySQL Wokbench, crie uma conexão (DEIXE A CONEXÃO SEM SENHA);
+	- No MySQL Wokbench, vá no Querry 1;
+	- No MySQL Wokbench, cole o códido do banco de dados;
+	- Execute o código do banco de dados.
+
+4 - Instale o DOTNET
+	- Entre no site oficial do Xampp (https://dotnet.microsoft.com/pt-br/download/dotnet/thank-you/runtime-desktop-7.0.14-windows-x64-installer?cid=getdotnetcore)
+	- Baixe a versão 7.0 DO .NET Core (DOTNET).
+
+5 - Para encontrar o aplicativo do Bolão, siga os seguintes passos:
+	- Entre na pasta "Bolão Univap";
+	- Entre na pasta "bin";
+	- Entre na pasta "Debug";
+	- Entre na pasta "net7.0-windows".
+
+Após segui estes passos, basta iniciar o aplicativo.
+
+OBS: É possivel criar um atalho para o aplicativo do Bolão. 
