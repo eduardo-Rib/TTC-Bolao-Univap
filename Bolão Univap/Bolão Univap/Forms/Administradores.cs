@@ -14,6 +14,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using Google.Protobuf.WellKnownTypes;
 using System.Data.Common;
+using Bolão_Univap.Database;
 
 namespace Bolão_Univap
 {

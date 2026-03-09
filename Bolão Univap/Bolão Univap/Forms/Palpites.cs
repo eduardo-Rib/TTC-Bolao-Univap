@@ -12,6 +12,7 @@ using MySqlX.XDevAPI.Relational;
 using MySqlX.XDevAPI.Common;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Reflection.PortableExecutable;
+using Bolão_Univap.Database;
 
 
 namespace Bolão_Univap

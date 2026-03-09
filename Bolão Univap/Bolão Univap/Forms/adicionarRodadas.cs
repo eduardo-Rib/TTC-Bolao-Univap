@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using Bolão_Univap.Database;
+using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Common;
 using Org.BouncyCastle.Utilities;
 using System;

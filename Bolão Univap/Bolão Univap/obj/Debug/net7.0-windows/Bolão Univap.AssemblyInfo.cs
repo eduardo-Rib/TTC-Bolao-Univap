@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Bolão Univap")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8f2efc4a3d57b0d7b6946e1b0db19f8692046c45")]
 [assembly: System.Reflection.AssemblyProductAttribute("Bolão Univap")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Bolão Univap")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

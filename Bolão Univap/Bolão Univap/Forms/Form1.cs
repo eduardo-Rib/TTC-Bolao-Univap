@@ -1,3 +1,4 @@
+using Bolão_Univap.Database;
 using MySql.Data.MySqlClient;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -15,6 +16,9 @@ namespace Bolão_Univap
         public Form1()
         {
             InitializeComponent();
+
+            loading loading = new loading();
+            loading.ShowDialog();
 
             Login login = new Login(this);
             login.ShowDialog();
