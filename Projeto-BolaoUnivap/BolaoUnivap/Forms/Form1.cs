@@ -1,4 +1,5 @@
 using BolaoUnivap.Database;
+using BolaoUnivap.Services;
 using MySql.Data.MySqlClient;
 using System.Collections.ObjectModel;
 using System.Data;
@@ -267,67 +268,19 @@ namespace BolaoUnivap
         {
             if (getLOGIN())
             {
-                ExportarParaExcel();
+                if (listView1.Items.Count > 0)
+                {
+                    exportarExcel.classificacao(listView1);
+                }
+                else
+                {
+                    MessageBox.Show("Não há dados para exportar");
+                }
             }
             else
             {
                 MessageBox.Show("Faça login para ter acesso a essa funcionalidade!");
             }
         }
-
-
-        //----------------------------METÓDO QUE CRIA O ARQUIVO EXCEL-----------------------------------
-        public void ExportarParaExcel()
-        {
-            if (listView1.Items.Count > 0)
-            {
-                SaveFileDialog Local = new SaveFileDialog();
-                Local.Filter = "Excel |*.xlsx";
-                Local.ShowDialog();
-
-                try
-                {
-                    Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
-                    Microsoft.Office.Interop.Excel.Workbook pasta = app.Workbooks.Add();
-                    Microsoft.Office.Interop.Excel.Worksheet planilha;
-                    planilha = pasta.Worksheets.Add();
-                    planilha.Name = "Classificação";
-
-                    int linha = 2, coluna = 1;
-
-                    planilha.Cells[1, 1] = listView1.Columns[0].Text;
-                    planilha.Cells[1, 2] = listView1.Columns[1].Text;
-                    planilha.Cells[1, 3] = listView1.Columns[2].Text;
-                    planilha.Cells[1, 4] = listView1.Columns[3].Text;
-                    planilha.Cells[1, 5] = listView1.Columns[4].Text;
-                    planilha.Cells[1, 6] = listView1.Columns[5].Text;
-
-                    foreach (ListViewItem lvItem in listView1.Items)
-                    {
-                        coluna = 1;
-                        foreach (ListViewItem.ListViewSubItem lvSubItem in lvItem.SubItems)
-                        {
-                            planilha.Cells[linha, coluna] = lvSubItem.Text;
-                            coluna++;
-                        }
-                        linha++;
-                    }
-
-                
-                    pasta.SaveAs(Local.FileName);
-                    pasta.Close();
-                    app.Quit();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                MessageBox.Show("Excel gerado no diretório selecionado");
-            }
-            else
-            {
-                MessageBox.Show("Não há dados para exportar");
-            }
-        }  
     }
 }
