@@ -14,8 +14,8 @@ namespace BolaoUnivap
 {
     public partial class Participantes : Form
     {
-        private string[] nome = new string[100]; 
-        private string[] time = new string[100]; 
+        private string[] nome = new string[100];
+        private string[] time = new string[100];
         private int[] id = new int[100];
         private int cont = 0;
         DataTable dt = new DataTable();
@@ -182,7 +182,7 @@ namespace BolaoUnivap
 
         public void ResgatarParticipantes()
         {
-            comboBox1.Items.Clear();    
+            comboBox1.Items.Clear();
             string comando = ($"SELECT id, nome, time FROM participantes ORDER BY id");
             dt = DataBase.Consultas(comando);
 
@@ -196,6 +196,11 @@ namespace BolaoUnivap
                     setTime(dt.Rows[i].Field<string>("time"), i);
                 }
             }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

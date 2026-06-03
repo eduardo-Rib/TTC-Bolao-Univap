@@ -25,7 +25,7 @@
     <Compile Update="Forms\Palpites.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\Participantes.cs">
+    <Compile Update="Forms\Participantes\Participantes.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="Forms\Resultados.cs">
