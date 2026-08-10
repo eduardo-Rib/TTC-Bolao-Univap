@@ -34,11 +34,11 @@ namespace BolaoUnivap
 
             if (dt.Rows.Count == 0)
             {
-                if (checkBox1.Checked)
-                {
-                    Form1 form1 = new Form1();
-                    form1.ExportarParaExcel();
-                }
+                //if (checkBox1.Checked)
+                //{
+                //    Form1 form1 = new Form1();
+                //    exportarExcel.classificacao(form1.listView1);
+                //}
 
                 comando = ($"DELETE FROM rodadas");
                 if (DataBase.Add_deletar_alterar(comando) == true)

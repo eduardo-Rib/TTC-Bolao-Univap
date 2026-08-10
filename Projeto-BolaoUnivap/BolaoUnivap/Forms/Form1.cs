@@ -13,6 +13,18 @@ namespace BolaoUnivap
         bool LOGIN = false;
         int Adm = 0;
 
+        enum funcao
+        {
+            Participantes,
+            Rodadas,
+            Palpites,
+            LogOut,
+            Resultados,
+            Administradores
+        }
+
+        private funcao Menu;
+
         //-------------------------CONSTRUTOR-------------------------
         public Form1()
         {
@@ -73,6 +85,7 @@ namespace BolaoUnivap
         {
             if (getLOGIN())
             {
+                Menu = funcao.Participantes;
                 ColetarParticipantes();
             }
         }
@@ -121,14 +134,14 @@ namespace BolaoUnivap
         {
             if (getLOGIN())
             {
-                Participantes participantes = new Participantes();
-                participantes.ShowDialog();
+                ColetarParticipantes();
+                Menu = funcao.Participantes;
             }
             else
             {
-                MessageBox.Show("Faça login para ter acesso a essa funcionalidade!");
+                Login login = new Login(this);
+                login.ShowDialog();
             }
-
         }
 
 
@@ -143,7 +156,8 @@ namespace BolaoUnivap
             }
             else
             {
-                MessageBox.Show("Faça login para ter acesso a essa funcionalidade!");
+                Login login = new Login(this);
+                login.ShowDialog();
             }
         }
 
@@ -159,22 +173,30 @@ namespace BolaoUnivap
             }
             else
             {
-                MessageBox.Show("Faça login para ter acesso a essa funcionalidade!");
+                Login login = new Login(this);
+                login.ShowDialog();
             }
         }
 
 
 
-        //----------------------------BOTÃO DE ATUALIZAR CLASSIFICAÇÃO-----------------------------------
+        //----------------------------BOTÃO DE INCLUIR NOVO CADASTRO-----------------------------------
         private void button2_Click(object sender, EventArgs e)
         {
             if (getLOGIN())
             {
-                ColetarParticipantes();
+                switch (Menu)
+                {
+                    case funcao.Participantes:
+                        Participantes participantes = new Participantes();
+                        participantes.ShowDialog();
+                        break;
+                }
             }
             else
             {
-                MessageBox.Show("Faça login para ter acesso a essa funcionalidade!");
+                Login login = new Login(this);
+                login.ShowDialog();
             }
         }
 
@@ -190,7 +212,8 @@ namespace BolaoUnivap
             }
             else
             {
-                MessageBox.Show("Faça login para ter acesso a essa funcionalidade!");
+                Login login = new Login(this);
+                login.ShowDialog();
             }
         }
 
@@ -206,7 +229,8 @@ namespace BolaoUnivap
             }
             else
             {
-                MessageBox.Show("Faça login para ter acesso a essa funcionalidade!");
+                Login login = new Login(this);
+                login.ShowDialog();
             }
         }
 
@@ -222,13 +246,23 @@ namespace BolaoUnivap
             }
             else
             {
-                MessageBox.Show("Faça login para ter acesso a essa funcionalidade!");
+                Login login = new Login(this);
+                login.ShowDialog();
             }
         }
 
         private void rodadasToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-
+            if (getLOGIN())
+            {
+                ColetarParticipantes();
+                Menu = funcao.Participantes;
+            }
+            else
+            {
+                Login login = new Login(this);
+                login.ShowDialog();
+            }
         }
 
 
@@ -257,7 +291,8 @@ namespace BolaoUnivap
             }
             else
             {
-                MessageBox.Show("Faça login para ter acesso a essa funcionalidade!");
+                Login login = new Login(this);
+                login.ShowDialog();
             }
         }
 
@@ -279,8 +314,14 @@ namespace BolaoUnivap
             }
             else
             {
-                MessageBox.Show("Faça login para ter acesso a essa funcionalidade!");
+                Login login = new Login(this);
+                login.ShowDialog();
             }
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

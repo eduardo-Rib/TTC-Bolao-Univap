@@ -80,8 +80,8 @@ namespace BolaoUnivap
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            textBox2.Text = getNome(comboBox1.SelectedIndex);
-            textBox4.Text = getTime(comboBox1.SelectedIndex);
+            //textBox2.Text = getNome(comboBox1.SelectedIndex);
+            //textBox4.Text = getTime(comboBox1.SelectedIndex);
         }
         private void Participantes_Load(object sender, EventArgs e)
         {
@@ -127,14 +127,13 @@ namespace BolaoUnivap
         //------------------Remove os Participantess------------------------
         private void button2_Click(object sender, EventArgs e)
         {
-            if (textBox2.Text != "" && textBox4.Text != "" && comboBox1.SelectedIndex != -1)
+            if (textBox2.Text != "" && comboBox1.SelectedIndex != -1)
             {
                 int id = getId(comboBox1.SelectedIndex);
                 string comando = ($"DELETE FROM participantes WHERE id = {id}");
                 if (DataBase.Add_deletar_alterar(comando) == true)
                 {
                     textBox2.Text = "";
-                    textBox4.Text = "";
                     comboBox1.Text = "";
                     ResgatarParticipantes();
                     MessageBox.Show(" Participante removido");
@@ -153,16 +152,14 @@ namespace BolaoUnivap
         //------------------Edita os Participantess------------------------
         private void button3_Click(object sender, EventArgs e)
         {
-            if (textBox2.Text != "" && textBox4.Text != "" && comboBox1.SelectedIndex != -1)
+            if (textBox2.Text != "" && comboBox1.SelectedIndex != -1)
             {
                 int id = getId(comboBox1.SelectedIndex);
                 string nome = textBox2.Text;
-                string time = textBox4.Text;
                 string comando = ($"UPDATE participantes SET nome = '{nome}', time = '{time}' WHERE id = {id}");
                 if (DataBase.Add_deletar_alterar(comando) == true)
                 {
                     textBox2.Text = "";
-                    textBox4.Text = "";
                     comboBox1.Text = "";
                     ResgatarParticipantes();
                     MessageBox.Show(" Participante atualizado");
