@@ -1,9 +1,6 @@
 using BolaoUnivap.Database;
 using BolaoUnivap.Services;
-using MySql.Data.MySqlClient;
-using System.Collections.ObjectModel;
 using System.Data;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BolaoUnivap
 {
@@ -45,9 +42,6 @@ namespace BolaoUnivap
             listView1.Columns.Add("POSIÇÃO", 70, HorizontalAlignment.Left);
             listView1.Columns.Add("NOME", 140, HorizontalAlignment.Left);
             listView1.Columns.Add("PONTOS", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("ACERTOS EXATOS", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("ACERTOS CLÁSSICOS", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("PRECISÃO ACERTOS", 100, HorizontalAlignment.Left);
             listView1.Columns.Clear();
         }
 
@@ -95,7 +89,37 @@ namespace BolaoUnivap
         //----------------------------CHAMA O BANCO PARA RESGATAR OS PARTICIPANTES-----------------------------------
         public void ColetarParticipantes()
         {
-            string comando = ($"SELECT nome, pontos, acertosExatos, acertosClassicos, precisaoAcertos FROM participantes ORDER BY pontos DESC, acertosExatos DESC, acertosClassicos DESC, precisaoAcertos DESC");
+            string comando = @"
+                SELECT 
+                    p.nome,
+                    COALESCE(SUM(
+                        CASE
+                            WHEN pal.gols_time1 = j.gols_time1
+                             AND pal.gols_time2 = j.gols_time2
+                            THEN 3 * j.bonus
+
+                            WHEN SIGN(pal.gols_time1 - pal.gols_time2) =
+                                 SIGN(j.gols_time1 - j.gols_time2)
+                            THEN 1 * j.bonus
+
+                            ELSE 0
+                        END
+                    ), 0) AS pontos
+
+                FROM participantes p
+
+                LEFT JOIN palpites pal 
+                    ON pal.id_participante = p.id_participante
+
+                LEFT JOIN jogos j 
+                    ON j.id_jogo = pal.id_jogo
+                    AND j.gols_time1 IS NOT NULL
+                    AND j.gols_time2 IS NOT NULL
+
+                GROUP BY p.id_participante, p.nome
+
+                ORDER BY pontos DESC;
+            ";
             dt = DataBase.Consultas(comando);
             PrintListView(dt);
         }
@@ -107,9 +131,6 @@ namespace BolaoUnivap
             listView1.Columns.Add("POSIÇÃO", 70, HorizontalAlignment.Left);
             listView1.Columns.Add("NOME", 140, HorizontalAlignment.Left);
             listView1.Columns.Add("PONTOS", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("ACERTOS EXATOS", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("ACERTOS CLÁSSICOS", 100, HorizontalAlignment.Left);
-            listView1.Columns.Add("PRECISÃO ACERTOS", 100, HorizontalAlignment.Left);
 
             for (int i = 0; i < dt.Rows.Count; i++)
             {
@@ -117,10 +138,7 @@ namespace BolaoUnivap
                 {
                     (i+1).ToString(),
                     dt.Rows[i].Field<string>("nome"),
-                    dt.Rows[i].Field<int>("pontos").ToString(),
-                    dt.Rows[i].Field<int>("acertosExatos").ToString(),
-                    dt.Rows[i].Field<int>("acertosClassicos").ToString(),
-                    dt.Rows[i].Field<float>("precisaoAcertos").ToString(),
+                    dt.Rows[i].Field<decimal>("pontos").ToString(),
                 };
                 var linha_TextView = new ListViewItem(row);
                 listView1.Items.Add(linha_TextView);
